@@ -15,4 +15,16 @@ defmodule Toyrobot.CommandRunnerTest do
     simulation = CommandRunner.run([{:place, %{east: 10, north: 10, facing: :north}}])
     assert simulation == nil
   end
+
+  test "ignors commands until a valid placement" do
+    %Simulation{robot: robot} = [
+      :move,
+      {:place, %{east: 1, north: 2, facing: :north}},
+    ]
+    |> CommandRunner.run()
+
+    assert robot.east == 1
+    assert robot.north == 2
+    assert robot.facing == :north
+  end
 end
