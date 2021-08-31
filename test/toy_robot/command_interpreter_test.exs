@@ -11,11 +11,12 @@ defmodule ToyRobot.CommandInterpreterTest do
 
   test "marks invalid commands as invalid" do
     commands = ["SPIN", "TWIRL", "EXTERMINATE"]
-    output = commands  |> CommandInterpreter.interpret()
+    output = commands |> CommandInterpreter.interpret()
+
     assert output = [
-      {:invalid, "SPIN"},
-      {:invalid, "TWIRL"},
-      {:invalid, "EXTERMINATE"}
-    ]
+             {:invalid, "SPIN"},
+             {:invalid, "TWIRL"},
+             {:invalid, "EXTERMINATE"}
+           ]
   end
 end

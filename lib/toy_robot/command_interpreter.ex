@@ -26,11 +26,12 @@ defmodule ToyRobot.CommandInterpreter do
     [east, north, facing] = rest |> String.split(",")
     to_int = &String.to_integer/1
 
-    {:place, %{
-        east: to_int.(east),
-        north: to_int.(north),
-        facing: facing |> String.downcase |> String.to_atom
-    }}
+    {:place,
+     %{
+       east: to_int.(east),
+       north: to_int.(north),
+       facing: facing |> String.downcase() |> String.to_atom()
+     }}
   end
 
   defp do_interpret("MOVE"), do: :move

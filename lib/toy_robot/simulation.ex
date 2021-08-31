@@ -93,7 +93,7 @@ defmodule ToyRobot.Simulation do
   """
 
   def turn_left(%Simulation{robot: robot} = simulation) do
-    {:ok, %{simulation | robot: robot |> Robot.turn_left}}
+    {:ok, %{simulation | robot: robot |> Robot.turn_left()}}
   end
 
   @doc """
@@ -114,7 +114,7 @@ defmodule ToyRobot.Simulation do
   """
 
   def turn_right(%Simulation{robot: robot} = simulation) do
-    {:ok, %{simulation | robot: robot |> Robot.turn_right}}
+    {:ok, %{simulation | robot: robot |> Robot.turn_right()}}
   end
 
   @doc """
