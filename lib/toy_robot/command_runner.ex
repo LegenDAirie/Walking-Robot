@@ -13,6 +13,7 @@ defmodule ToyRobot.CommandRunner do
   def run([_first | rest]), do: run(rest)
   def run([]), do: nil
 
+  def run([{:invalid, _command} | rest], simulation), do: run(rest, simulation)
   def run([:move | rest], simulation) do
     new_simulation =
       simulation
