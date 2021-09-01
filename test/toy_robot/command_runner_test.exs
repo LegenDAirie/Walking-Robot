@@ -3,6 +3,8 @@ defmodule Toyrobot.CommandRunnerTest do
 
   alias ToyRobot.{CommandRunner, Simulation}
 
+  import ExUnit.CaptureIO
+
   test "handles a valid place command" do
     %Simulation{robot: robot} =
       CommandRunner.run([{:place, %{east: 1, north: 2, facing: :north}}])
@@ -80,5 +82,18 @@ defmodule Toyrobot.CommandRunnerTest do
     assert robot.east == 1
     assert robot.north == 2
     assert robot.facing == :east
+  end
+
+  test "handles a place + report command" do
+    commands = [
+      {:place, %{east: 1, north: 2, facing: :north}},
+      :report
+    ]
+
+    output = capture_io fn ->
+      CommandRunner.run(commands)
+    end
+
+    assert output |> String.trim == "The robot is at (1, 2) and is facing NORTH"
   end
 end
