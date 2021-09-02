@@ -29,3 +29,6 @@ toy_robot-*.tar
 *.beam
 /config/*.secret.exs
 .elixir_ls/
+
+# The built Escript
+/toy_robot
