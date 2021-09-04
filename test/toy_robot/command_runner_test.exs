@@ -90,63 +90,68 @@ defmodule Toyrobot.CommandRunnerTest do
       :report
     ]
 
-    output = capture_io fn ->
-      CommandRunner.run(commands)
-    end
+    output =
+      capture_io(fn ->
+        CommandRunner.run(commands)
+      end)
 
-    assert output |> String.trim == "The robot is at (1, 2) and is facing NORTH"
+    assert output |> String.trim() == "The robot is at (1, 2) and is facing NORTH"
   end
 
   test "handles a place + invalid command" do
-    %Simulation{robot: robot} = [
-      {:place, %{east: 1, north: 2, facing: :north}},
-      {:invalid, "EXTERMINATE"}
-    ]
-    |> CommandRunner.run()
+    %Simulation{robot: robot} =
+      [
+        {:place, %{east: 1, north: 2, facing: :north}},
+        {:invalid, "EXTERMINATE"}
+      ]
+      |> CommandRunner.run()
+
     assert robot.east == 1
     assert robot.north == 2
     assert robot.facing == :north
   end
 
   test "robot can not move past the north boundry" do
-    %Simulation{robot: robot} = [
-      {:place, %{east: 0, north: 4, facing: :north}},
-      :move
-    ]
-    |> CommandRunner.run()
+    %Simulation{robot: robot} =
+      [
+        {:place, %{east: 0, north: 4, facing: :north}},
+        :move
+      ]
+      |> CommandRunner.run()
 
     assert robot.north == 4
   end
 
   test "robot can not move past the east boundry" do
-    %Simulation{robot: robot} = [
-      {:place, %{east: 4, north: 0, facing: :east}},
-      :move
-    ]
-    |> CommandRunner.run()
+    %Simulation{robot: robot} =
+      [
+        {:place, %{east: 4, north: 0, facing: :east}},
+        :move
+      ]
+      |> CommandRunner.run()
 
     assert robot.east == 4
   end
 
   test "robot can not move past the south boundry" do
-    %Simulation{robot: robot} = [
-      {:place, %{east: 0, north: 0, facing: :south}},
-      :move
-    ]
-    |> CommandRunner.run()
+    %Simulation{robot: robot} =
+      [
+        {:place, %{east: 0, north: 0, facing: :south}},
+        :move
+      ]
+      |> CommandRunner.run()
 
     assert robot.north == 0
   end
 
   test "robot can not move past the west boundry" do
-    %Simulation{robot: robot} = [
-      {:place, %{east: 0, north: 0, facing: :west}},
-      :move
-    ]
-    |> CommandRunner.run()
+    %Simulation{robot: robot} =
+      [
+        {:place, %{east: 0, north: 0, facing: :west}},
+        :move
+      ]
+      |> CommandRunner.run()
 
     assert robot.east == 0
   end
-
-
 end

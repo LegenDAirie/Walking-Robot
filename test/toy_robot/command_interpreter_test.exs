@@ -22,5 +22,4 @@ defmodule ToyRobot.CommandInterpreterTest do
              {:invalid, "MoVe"}
            ]
   end
-
 end
